@@ -6,28 +6,28 @@ LABEL description="Debian based simple mailtrap container for development purpos
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
-    && apt-get -q -y --no-install-recommends install \
-    curl \
-    dovecot-imapd \
-    nginx \
-    php \
-    php-fpm \
-    php-imap \
-    php-mbstring \
-    php-pear \
-    php-sqlite3 \
-    php-zip \
-    postfix \
-    roundcube \
-    roundcube-plugins \
-    roundcube-plugins-extra \
-    roundcube-sqlite3 \
-    rsyslog \
-    sqlite3 \
-    ssl-cert \
-    telnet \
-    supervisor \
-    && rm -rf /var/lib/apt/lists/*
+  && apt-get -q -y --no-install-recommends install \
+  curl \
+  dovecot-imapd \
+  nginx \
+  php \
+  php-fpm \
+  php-imap \
+  php-mbstring \
+  php-pear \
+  php-sqlite3 \
+  php-zip \
+  postfix \
+  roundcube \
+  roundcube-plugins \
+  roundcube-plugins-extra \
+  roundcube-sqlite3 \
+  rsyslog \
+  sqlite3 \
+  ssl-cert \
+  telnet \
+  supervisor \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV MAILTRAP_USER mailtrap
 ENV MAILTRAP_PASSWORD mailtrap
@@ -51,14 +51,14 @@ RUN usermod -a -G dovecot postfix
 # NGINX
 COPY root/etc/nginx/sites-available/roundcube /etc/nginx/sites-available/
 RUN rm /etc/nginx/sites-enabled/default && \
-    ln -s /etc/nginx/sites-available/roundcube /etc/nginx/sites-enabled/roundcube
+  ln -s /etc/nginx/sites-available/roundcube /etc/nginx/sites-enabled/roundcube
 
 # Roundcube
 COPY root/etc/roundcube/config.inc.php etc/roundcube/config.inc.php
 RUN mkdir -p /var/lib/roundcube/db && \
-    sqlite3 -init /usr/share/roundcube/SQL/sqlite.initial.sql /var/lib/roundcube/db/sqlite.db && \
-    chmod 775 -R /var/lib/roundcube/db && \
-    chown -R www-data:www-data /var/lib/roundcube/db
+  sqlite3 -init /usr/share/roundcube/SQL/sqlite.initial.sql /var/lib/roundcube/db/sqlite.db && \
+  chmod 775 -R /var/lib/roundcube/db && \
+  chown -R www-data:www-data /var/lib/roundcube/db
 
 # API
 COPY root/usr/share/roundcube/api.php /usr/share/roundcube/
