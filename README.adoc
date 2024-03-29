@@ -1,5 +1,7 @@
 # Purpose
 
+Forked...
+
 This image provides a simple catch all email server for development with smtp, imap and webmail support. The base image is debian and only default packages are used. **Only use this image for development purposes, because it is not designed to be secure. If it is connectable from the Internet, it can lead to an open relay mail server.**
 
 # Inspired by
